@@ -4,140 +4,879 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seni Learn AI</title>
+
 <style>
-:root{
-  --bg:#f7f3eb; --card:#fffdf9; --text:#26241f; --muted:#7d786f;
-  --line:#e7e0d5; --accent:#51483d; --soft:#eee8de; --green:#66745b;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f7f4ee;
+  color:#292722;
+  min-height:100vh;
 }
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button{font:inherit;cursor:pointer;border:0} .app{display:flex;min-height:100vh}
-.sidebar{width:245px;background:#fbf9f4;border-right:1px solid var(--line);padding:28px 18px;position:fixed;height:100vh}
-.brand{padding:0 12px 28px}.brand h1{font-size:22px;margin:0 0 4px;letter-spacing:-.5px}.brand p{margin:0;color:var(--muted);font-size:12px}
-.nav button{display:block;width:100%;text-align:left;background:transparent;padding:12px 13px;border-radius:12px;margin:3px 0;color:#666158}
-.nav button.active,.nav button:hover{background:var(--soft);color:var(--text)}
-.main{margin-left:245px;width:calc(100% - 245px);padding:42px 6vw 90px;max-width:1400px}
-.mobile-top{display:none}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
-.greeting h2{font-size:30px;margin:0 0 6px;letter-spacing:-1px}.greeting p{margin:0;color:var(--muted)}
-.avatar{width:42px;height:42px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:700}
-.search{background:var(--card);border:1px solid var(--line);padding:16px 18px;border-radius:16px;display:flex;gap:10px;align-items:center;margin-bottom:30px}
-.search input{border:0;outline:0;background:transparent;width:100%;font-size:15px;color:var(--text)}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin:28px 0 14px}.section-title h3{margin:0;font-size:17px}.section-title span{font-size:12px;color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
-.continue{display:flex;justify-content:space-between;align-items:center;gap:20px}
-.subject-icon{width:48px;height:48px;border-radius:14px;background:var(--soft);display:grid;place-items:center;font-size:23px;flex:none}
-.row{display:flex;gap:14px;align-items:center}.grow{flex:1}.muted{color:var(--muted);font-size:13px}.progress{height:7px;background:#e9e4dc;border-radius:99px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;width:78%;background:#74695b;border-radius:99px}
-.primary{background:var(--accent);color:white;padding:11px 16px;border-radius:12px}.secondary{background:var(--soft);color:var(--text);padding:11px 16px;border-radius:12px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.subject{padding:17px}.subject h4{margin:10px 0 4px;font-size:14px}.subject p{margin:0;color:var(--muted);font-size:12px}
-.streak{display:grid;grid-template-columns:1fr 1fr;gap:14px}.stat strong{display:block;font-size:28px;margin-top:5px}.stat span{color:var(--muted);font-size:12px}
-.page{display:none}.page.active{display:block}
-.lesson-head{max-width:800px}.lesson-head h1{font-size:36px;letter-spacing:-1px;margin:8px 0}.lesson{max-width:800px;line-height:1.75;font-size:16px}.lesson h3{margin-top:30px}.check{background:var(--soft);border-radius:18px;padding:18px;margin:25px 0}.bottom{display:none}
-@media(max-width:800px){
-.sidebar{display:none}.main{margin:0;width:100%;padding:22px 17px 95px}.mobile-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.mobile-top b{font-size:20px}.top{display:none}.search{margin-bottom:22px}.greeting h2{font-size:26px}.continue{align-items:flex-start;flex-direction:column}.continue .primary{width:100%}.grid{grid-template-columns:repeat(2,1fr)}.streak{grid-template-columns:1fr 1fr}.bottom{display:flex;position:fixed;bottom:0;left:0;right:0;height:68px;background:rgba(255,253,249,.96);border-top:1px solid var(--line);z-index:10;justify-content:space-around;padding-top:7px}.bottom button{background:none;color:var(--muted);font-size:11px}.bottom button.active{color:var(--text);font-weight:700}.bottom div{font-size:20px;margin-bottom:2px}.lesson-head h1{font-size:29px}}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  display:flex;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;
+  background:#eeeae2;
+  border-right:1px solid #ddd8ce;
+  padding:22px 14px;
+  position:fixed;
+  height:100vh;
+  left:0;
+  top:0;
+}
+
+.logo{
+  padding:8px 12px 25px;
+}
+
+.logo h1{
+  font-size:23px;
+  letter-spacing:-.5px;
+}
+
+.logo span{
+  font-size:12px;
+  color:#777168;
+}
+
+.nav button{
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
+  padding:12px 14px;
+  border-radius:12px;
+  margin-bottom:4px;
+  color:#57534b;
+}
+
+.nav button:hover,
+.nav button.active{
+  background:#fffdf9;
+  color:#171614;
+}
+
+.creator{
+  position:absolute;
+  bottom:18px;
+  left:20px;
+  right:20px;
+  font-size:11px;
+  color:#8a857c;
+  line-height:1.5;
+}
+
+/* MAIN */
+.main{
+  margin-left:240px;
+  width:calc(100% - 240px);
+  padding:30px;
+}
+
+.page{
+  max-width:1050px;
+  margin:auto;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.top h2{
+  font-size:28px;
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#ded8ce;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+/* CARDS */
+.card{
+  background:#fffdf9;
+  border:1px solid #e3ded5;
+  border-radius:20px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.025);
+}
+
+.hero{
+  padding:30px;
+}
+
+.hero h1{
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.muted{
+  color:#817b72;
+}
+
+.ask{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.ask input{
+  flex:1;
+  border:1px solid #ddd7cd;
+  background:white;
+  border-radius:14px;
+  padding:14px 16px;
+  outline:none;
+}
+
+.ask input:focus{
+  border-color:#aaa399;
+}
+
+.primary{
+  border:0;
+  border-radius:14px;
+  background:#292722;
+  color:white;
+  padding:12px 20px;
+}
+
+.primary:hover{
+  opacity:.9;
+}
+
+/* SUBJECTS */
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:25px 0 14px;
+}
+
+.subject-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.subject{
+  border:1px solid #e3ded5;
+  background:#fffdf9;
+  border-radius:16px;
+  padding:18px;
+  min-height:105px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.subject:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.subject .icon{
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.subject h3{
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+.subject p{
+  font-size:11px;
+  color:#8b857b;
+}
+
+/* CONTINUE */
+.continue{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.progress{
+  height:7px;
+  background:#e8e3db;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress div{
+  height:100%;
+  width:35%;
+  background:#5c5850;
+}
+
+/* CHAT */
+.chat-box{
+  min-height:430px;
+  display:flex;
+  flex-direction:column;
+}
+
+.messages{
+  flex:1;
+  overflow:auto;
+  padding:10px 0;
+}
+
+.message{
+  max-width:75%;
+  padding:13px 16px;
+  border-radius:16px;
+  margin-bottom:12px;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.ai{
+  background:#eeeae3;
+  align-self:flex-start;
+}
+
+.user{
+  background:#292722;
+  color:white;
+  margin-left:auto;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+  border-top:1px solid #e5e0d7;
+  padding-top:15px;
+}
+
+.chat-input input{
+  flex:1;
+  border:1px solid #ddd7cd;
+  border-radius:13px;
+  padding:13px;
+  outline:none;
+}
+
+/* LESSON */
+.lesson h1{
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.lesson h2{
+  margin:25px 0 10px;
+}
+
+.lesson p{
+  line-height:1.75;
+  color:#5f5a52;
+}
+
+.lesson-box{
+  background:#f0ece5;
+  border-radius:15px;
+  padding:18px;
+  margin:18px 0;
+}
+
+.quick{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.quick button{
+  border:1px solid #d8d2c8;
+  background:#fffdf9;
+  border-radius:12px;
+  padding:10px 14px;
+}
+
+/* PROGRESS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:#fffdf9;
+  border:1px solid #e3ded5;
+  border-radius:17px;
+  padding:20px;
+}
+
+.stat strong{
+  display:block;
+  font-size:27px;
+  margin-top:5px;
+}
+
+/* MOBILE */
+.bottom-nav{
+  display:none;
+}
+
+@media(max-width:850px){
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:18px 15px 90px;
+  }
+
+  .top h2{
+    font-size:23px;
+  }
+
+  .subject-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .bottom-nav{
+    position:fixed;
+    display:flex;
+    bottom:10px;
+    left:10px;
+    right:10px;
+    background:#fffdf9;
+    border:1px solid #ddd8cf;
+    border-radius:18px;
+    padding:7px;
+    z-index:20;
+    box-shadow:0 8px 30px rgba(0,0,0,.1);
+  }
+
+  .bottom-nav button{
+    flex:1;
+    border:0;
+    background:transparent;
+    padding:9px 2px;
+    font-size:11px;
+    color:#777168;
+    border-radius:12px;
+  }
+
+  .bottom-nav button.active{
+    background:#eeeae3;
+    color:#222;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+
+  .ask{
+    flex-direction:column;
+  }
+
+  .continue{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div class="app">
+
 <aside class="sidebar">
-  <div class="brand"><h1>✦ Seni Learn AI</h1><p>Learn anything. One step at a time.</p></div>
+
+  <div class="logo">
+    <h1>✦ Seni Learn AI</h1>
+    <span>Your personal learning companion</span>
+  </div>
+
   <nav class="nav">
-    <button class="active" onclick="show('home',this)">⌂ &nbsp; Home</button>
-    <button onclick="show('learn',this)">▣ &nbsp; Learn</button>
-    <button onclick="show('chat',this)">◌ &nbsp; Chat</button>
-    <button onclick="show('progress',this)">◫ &nbsp; Progress</button>
-    <button onclick="show('saved',this)">🔖 &nbsp; Saved</button>
-    <button onclick="show('explore',this)">✦ &nbsp; Explore</button>
-    <button onclick="show('settings',this)">⚙ &nbsp; Settings</button>
+    <button class="active" onclick="showPage('home',this)">⌂ Home</button>
+    <button onclick="showPage('learn',this)">▣ Learn</button>
+    <button onclick="showPage('chat',this)">◌ Chat</button>
+    <button onclick="showPage('progress',this)">◈ Progress</button>
+    <button onclick="showPage('saved',this)">♡ Saved</button>
+    <button onclick="showPage('explore',this)">✦ Explore</button>
+    <button onclick="showPage('settings',this)">⚙ Settings</button>
   </nav>
+
+  <div class="creator">
+    Created by <b>Mr. Shanuka Dissanayake</b><br>
+    AI capabilities powered by Google Gemini
+  </div>
+
 </aside>
 
 <main class="main">
-  <div class="mobile-top"><b>✦ Seni</b><div class="avatar">S</div></div>
 
-  <section id="home" class="page active">
-    <div class="top"><div class="greeting"><h2>Good morning 👋</h2><p>What would you like to learn today?</p></div><div class="avatar">S</div></div>
-    <div class="search">⌕ <input placeholder="Ask Seni anything..." onclick="show('chat')"></div>
-    <div class="section-title"><h3>Continue Learning</h3><span>1 active journey</span></div>
-    <div class="card continue">
-      <div class="row"><div class="subject-icon">☸</div><div class="grow"><b>Buddhism</b><div class="muted">Four Noble Truths</div><div class="progress"><i></i></div><small class="muted">78% complete</small></div></div>
-      <button class="primary" onclick="show('lesson')">Continue →</button>
+<!-- HOME -->
+<section id="home" class="page">
+
+  <div class="top">
+    <h2>Good morning 👋</h2>
+    <div class="avatar">S</div>
+  </div>
+
+  <div class="card hero">
+    <h1>What do you want to learn?</h1>
+    <p class="muted">
+      Ask anything. Seni will help you understand, practice and remember.
+    </p>
+
+    <div class="ask">
+      <input id="homeInput" placeholder="e.g. Teach me Buddhism from the beginning">
+      <button class="primary" onclick="startLearning()">Start learning</button>
     </div>
-    <div class="section-title"><h3>Today’s Learning</h3></div>
-    <div class="streak"><div class="card stat"><span>🔥 Streak</span><strong>7 days</strong><span>Keep going</span></div><div class="card stat"><span>⏱ Daily goal</span><strong>15 min</strong><span>Today: 0 min</span></div></div>
-    <div class="section-title"><h3>Subjects</h3><span>20 subjects</span></div>
-    <div class="grid" id="subjects"></div>
-  </section>
+  </div>
 
-  <section id="learn" class="page">
-    <div class="greeting"><h2>Learn 📚</h2><p>Choose something or create your own learning journey.</p></div>
-    <div class="section-title"><h3>Your journeys</h3></div>
-    <div class="card continue"><div class="row"><div class="subject-icon">☸</div><div><b>Buddhism</b><div class="muted">Beginner · Adaptive</div></div></div><button class="primary" onclick="show('lesson')">Continue</button></div>
-    <div class="section-title"><h3>Explore subjects</h3></div><div class="grid" id="subjects2"></div>
-  </section>
+  <div class="section-title">
+    <h3>Continue learning</h3>
+  </div>
 
-  <section id="chat" class="page">
-    <div class="greeting"><h2>Chat with Seni 💬</h2><p>Your friendly AI teacher.</p></div>
-    <div class="card" style="margin-top:22px">
-      <div class="row"><div class="subject-icon">✦</div><div><b>Hi, I'm Seni.</b><div class="muted">Ask me anything, or say “Teach me…”</div></div></div>
-      <div style="margin-top:22px" class="search"><input id="chatInput" placeholder="What do you want to learn?"><button class="primary" onclick="demoChat()">Ask</button></div>
-      <div id="chatReply" class="check" style="display:none"></div>
+  <div class="card continue">
+    <div>
+      <p class="muted">Buddhism</p>
+      <h2>The Four Noble Truths</h2>
+      <p class="muted">Lesson 3 · 12 min</p>
+
+      <div class="progress">
+        <div></div>
+      </div>
     </div>
-  </section>
 
-  <section id="lesson" class="page">
-    <div class="lesson-head"><div class="muted">☸ Buddhism · Lesson 1</div><h1>The Four Noble Truths</h1><div class="progress"><i style="width:68%"></i></div></div>
-    <article class="card lesson" style="margin-top:22px">
-      <p>The Four Noble Truths are a central framework in Buddhist teaching. They describe the problem of <b>dukkha</b>, its origin, its cessation, and the path leading to its cessation.</p>
-      <h3>💡 Think of it like this</h3><p>Imagine a doctor. First the doctor identifies the illness, finds its cause, explains that recovery is possible, and then gives a treatment. The Four Noble Truths follow a similar structure.</p>
-      <div class="check"><b>🧠 Quick check</b><p>Why is identifying the cause important?</p><button class="secondary" onclick="this.innerText='Because understanding a cause helps us understand how change or cessation may be possible.'">Show answer</button></div>
-      <h3>✨ What's next?</h3><p><b>The Noble Eightfold Path</b> — explore the practical path traditionally taught for cultivating wisdom, ethical conduct and mental discipline.</p>
-      <button class="primary" onclick="alert('Next-topic engine will be connected to Gemini in a later phase.')">Continue →</button>
-    </article>
-  </section>
+    <button class="primary" onclick="openLesson()">Continue →</button>
+  </div>
 
-  <section id="progress" class="page">
-    <div class="greeting"><h2>Your Progress 📊</h2><p>Your learning journey at a glance.</p></div>
-    <div class="streak" style="margin-top:22px"><div class="card stat"><span>Lessons completed</span><strong>24</strong></div><div class="card stat"><span>Average quiz</span><strong>84%</strong></div></div>
-    <div class="section-title"><h3>Buddhism</h3><span>31 / 40 lessons</span></div>
-    <div class="card"><b>78%</b><div class="progress"><i></i></div><div class="muted">Strong: Four Noble Truths · Review: Dependent Origination</div></div>
-  </section>
+  <div class="section-title">
+    <h3>Explore subjects</h3>
+    <span class="muted">20 subjects</span>
+  </div>
 
-  <section id="saved" class="page"><div class="greeting"><h2>Saved 🔖</h2><p>Your knowledge library.</p></div><div class="card" style="margin-top:22px"><b>No saved items yet</b><p class="muted">Save lessons, concepts and explanations as you learn.</p></div></section>
-  <section id="explore" class="page"><div class="greeting"><h2>Explore ✦</h2><p>Interesting paths connected to what you learn.</p></div><div class="card" style="margin-top:22px"><b>You might like this</b><p class="muted">Learn how impermanence relates to attachment.</p><button class="secondary">Explore →</button></div></section>
-  <section id="settings" class="page"><div class="greeting"><h2>Settings ⚙</h2><p>Seni Learn AI preferences.</p></div><div class="card" style="margin-top:22px"><b>AI Provider</b><p class="muted">Gemini · BYOK will be connected in a later phase.</p><hr style="border:0;border-top:1px solid var(--line);margin:20px 0"><b>About Seni</b><p class="muted">Created by Mr. Shanuka Dissanayake.<br>AI technology powered by Google Gemini.</p></div></section>
+  <div class="subject-grid" id="subjectGrid"></div>
+
+</section>
+
+
+<!-- LEARN -->
+<section id="learn" class="page" style="display:none">
+
+  <div class="top">
+    <h2>Learn</h2>
+  </div>
+
+  <div class="card hero">
+    <h1>Choose a subject</h1>
+    <p class="muted">Start a new learning journey or continue one.</p>
+  </div>
+
+  <div class="subject-grid" id="learnGrid"></div>
+
+</section>
+
+
+<!-- CHAT -->
+<section id="chat" class="page" style="display:none">
+
+  <div class="top">
+    <h2>AI Teacher</h2>
+  </div>
+
+  <div class="card chat-box">
+
+    <div class="messages" id="messages">
+
+      <div class="message ai">
+        Hi! I'm Seni 👋<br><br>
+        I'm here to help you learn. Ask me anything or tell me what you want to study.
+      </div>
+
+    </div>
+
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Ask your teacher..." onkeydown="if(event.key==='Enter')sendMessage()">
+      <button class="primary" onclick="sendMessage()">Send</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LESSON -->
+<section id="lesson" class="page" style="display:none">
+
+  <div class="top">
+    <button onclick="showPage('home')" style="border:0;background:none">← Back</button>
+  </div>
+
+  <div class="card lesson">
+
+    <p class="muted">Buddhism · Lesson 3</p>
+
+    <h1>The Four Noble Truths</h1>
+
+    <p>
+      The Four Noble Truths are one of the central teachings of Buddhism.
+      They explain the nature of suffering, its cause, its ending, and the path
+      leading toward its ending.
+    </p>
+
+    <h2>1. The truth of suffering</h2>
+
+    <p>
+      Life contains experiences that are unsatisfactory or difficult.
+      Buddhism calls this <b>dukkha</b>.
+    </p>
+
+    <div class="lesson-box">
+      💡 <b>Simple example:</b><br>
+      Even when something makes us happy, we know that the experience can change.
+    </div>
+
+    <h2>Quick check</h2>
+
+    <p>What does the word “dukkha” broadly point toward?</p>
+
+    <div class="quick">
+      <button onclick="checkAnswer(false)">Permanent happiness</button>
+      <button onclick="checkAnswer(true)">Unsatisfactoriness / suffering</button>
+      <button onclick="checkAnswer(false)">Money</button>
+    </div>
+
+    <div id="answer" style="margin-top:15px"></div>
+
+  </div>
+
+</section>
+
+
+<!-- PROGRESS -->
+<section id="progress" class="page" style="display:none">
+
+  <div class="top">
+    <h2>Your progress</h2>
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      🔥 Streak
+      <strong>3 days</strong>
+    </div>
+
+    <div class="stat">
+      📚 Lessons
+      <strong>12</strong>
+    </div>
+
+    <div class="stat">
+      ⏱ Learning
+      <strong>4.5h</strong>
+    </div>
+
+    <div class="stat">
+      🧠 Quiz average
+      <strong>82%</strong>
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h2>Buddhism</h2>
+    <p class="muted">35% completed</p>
+
+    <div class="progress">
+      <div style="width:35%"></div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- SAVED -->
+<section id="saved" class="page" style="display:none">
+
+  <div class="top">
+    <h2>Saved knowledge</h2>
+  </div>
+
+  <div class="card">
+    <h3>♡ Your saved knowledge</h3>
+    <p class="muted" style="margin-top:8px">
+      Saved lessons, explanations, concepts and notes will appear here.
+    </p>
+  </div>
+
+</section>
+
+
+<!-- EXPLORE -->
+<section id="explore" class="page" style="display:none">
+
+  <div class="top">
+    <h2>Explore</h2>
+  </div>
+
+  <div class="card hero">
+    <h1>Discover connections</h1>
+    <p class="muted">
+      Seni can connect ideas across different subjects.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 Psychology + Buddhism</h3>
+    <p class="muted" style="margin-top:8px">
+      Explore how attention, emotions and the mind are discussed from different perspectives.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>🤖 AI + Future Technology</h3>
+    <p class="muted" style="margin-top:8px">
+      Understand how artificial intelligence may shape the future.
+    </p>
+  </div>
+
+</section>
+
+
+<!-- SETTINGS -->
+<section id="settings" class="page" style="display:none">
+
+  <div class="top">
+    <h2>Settings</h2>
+  </div>
+
+  <div class="card">
+    <h3>About Seni Learn AI</h3>
+    <p class="muted" style="margin-top:10px;line-height:1.6">
+      Seni Learn AI is a personal learning platform created by
+      <b>Mr. Shanuka Dissanayake</b>.
+      AI capabilities are powered by Google's Gemini technology.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Gemini</h3>
+    <p class="muted" style="margin-top:8px">
+      Gemini integration will be connected in a future version.
+    </p>
+  </div>
+
+</section>
+
 </main>
+
 </div>
 
-<div class="bottom">
-  <button class="active" onclick="show('home',this)"><div>⌂</div>Home</button>
-  <button onclick="show('learn',this)"><div>▣</div>Learn</button>
-  <button onclick="show('chat',this)"><div>◌</div>Chat</button>
-  <button onclick="show('progress',this)"><div>◫</div>Progress</button>
-  <button onclick="show('settings',this)"><div>•••</div>More</button>
-</div>
+
+<!-- MOBILE NAV -->
+<nav class="bottom-nav">
+  <button class="active" onclick="showPage('home',this)">⌂<br>Home</button>
+  <button onclick="showPage('learn',this)">▣<br>Learn</button>
+  <button onclick="showPage('chat',this)">◌<br>Chat</button>
+  <button onclick="showPage('progress',this)">◈<br>Progress</button>
+  <button onclick="showPage('settings',this)">⚙<br>More</button>
+</nav>
+
 
 <script>
-const data=[
-['🌌','Space & Astronomy'],['☸','Buddhism'],['🤖','Artificial Intelligence'],['🔬','Science'],
-['💰','Finance'],['🧠','Psychology'],['💻','Computer Science'],['🌍','Geography'],
-['🏛','History'],['🧬','Biology'],['⚛','Physics'],['🧪','Chemistry'],
-['📐','Mathematics'],['🌱','Environment'],['🏗','Engineering'],['📈','Business'],
-['💡','Philosophy'],['🎨','Art & Design'],['🗣','Languages'],['🚀','Future Technology']
+
+const subjects = [
+ ["🌌","Space & Astronomy","Explore the universe"],
+ ["☸️","Buddhism","Mind, life and wisdom"],
+ ["🤖","Artificial Intelligence","Understand AI"],
+ ["🔬","Science","Discover how things work"],
+ ["💰","Finance","Money and financial ideas"],
+ ["🧠","Psychology","Understand the mind"],
+ ["💻","Computer Science","Computers and code"],
+ ["🌍","Geography","Our planet"],
+ ["📜","History","Learn from the past"],
+ ["🧬","Biology","Life and living things"],
+ ["⚛️","Physics","Matter, energy and forces"],
+ ["🧪","Chemistry","Matter and reactions"],
+ ["➗","Mathematics","Numbers and logic"],
+ ["🌱","Environment","Our natural world"],
+ ["⚙️","Engineering","Build and solve"],
+ ["📈","Business","Business fundamentals"],
+ ["💭","Philosophy","Ideas and meaning"],
+ ["🎨","Art & Design","Creativity and design"],
+ ["🗣️","Languages","Learn languages"],
+ ["🚀","Future Technology","Tomorrow's technology"]
 ];
-function render(id){document.getElementById(id).innerHTML=data.map(x=>`<div class="card subject"><div class="subject-icon">${x[0]}</div><h4>${x[1]}</h4><p>Start a learning journey →</p></div>`).join('')}
-render('subjects');render('subjects2');
-function show(id,btn){
- document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
- const el=document.getElementById(id); if(el) el.classList.add('active');
- document.querySelectorAll('.nav button,.bottom button').forEach(x=>x.classList.remove('active'));
- if(btn) btn.classList.add('active');
- window.scrollTo({top:0,behavior:'smooth'});
+
+function createSubjects(id){
+
+  const grid=document.getElementById(id);
+
+  subjects.forEach(s=>{
+
+    const div=document.createElement("div");
+
+    div.className="subject";
+
+    div.innerHTML=`
+      <div class="icon">${s[0]}</div>
+      <h3>${s[1]}</h3>
+      <p>${s[2]}</p>
+    `;
+
+    div.onclick=()=>{
+      alert("Learning journey for "+s[1]+" will be created here.");
+    };
+
+    grid.appendChild(div);
+
+  });
+
 }
-function demoChat(){
- const v=document.getElementById('chatInput').value.trim();
- const r=document.getElementById('chatReply');
- r.style.display='block';
- r.innerHTML=v?`<b>✦ Seni</b><p>Great question: “${v}”. In the next phase, Gemini will answer this as your personal teacher and connect it to your learning journey.</p>`:`<b>✦ Seni</b><p>Tell me what you'd like to learn. Try: <b>Teach me Buddhism A–Z.</b></p>`;
+
+createSubjects("subjectGrid");
+createSubjects("learnGrid");
+
+
+function showPage(page,button){
+
+  document.querySelectorAll(".page").forEach(p=>{
+    p.style.display="none";
+  });
+
+  document.getElementById(page).style.display="block";
+
+  document.querySelectorAll(".nav button,.bottom-nav button")
+    .forEach(b=>b.classList.remove("active"));
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  window.scrollTo(0,0);
 }
+
+
+function startLearning(){
+
+  const input=document.getElementById("homeInput").value.trim();
+
+  if(!input){
+    alert("Tell me what you want to learn first 😊");
+    return;
+  }
+
+  showPage("chat");
+
+  addMessage(input,"user");
+
+  setTimeout(()=>{
+    addMessage(
+      "Great choice! 🌱 I can help you learn step by step. In the full Gemini version, I will create a learning path based on your level, goal, time and learning style.",
+      "ai"
+    );
+  },500);
+
+}
+
+
+function sendMessage(){
+
+  const input=document.getElementById("chatInput");
+
+  const text=input.value.trim();
+
+  if(!text)return;
+
+  addMessage(text,"user");
+
+  input.value="";
+
+  setTimeout(()=>{
+
+    addMessage(
+      "That's a great question! 😊 In the next version, Gemini will become your real AI teacher and give you a personalized answer.",
+      "ai"
+    );
+
+  },500);
+
+}
+
+
+function addMessage(text,type){
+
+  const messages=document.getElementById("messages");
+
+  const div=document.createElement("div");
+
+  div.className="message "+type;
+
+  div.textContent=text;
+
+  messages.appendChild(div);
+
+  messages.scrollTop=messages.scrollHeight;
+
+}
+
+
+function openLesson(){
+
+  showPage("lesson");
+
+}
+
+
+function checkAnswer(correct){
+
+  const answer=document.getElementById("answer");
+
+  if(correct){
+
+    answer.innerHTML="✅ Correct! Dukkha refers broadly to suffering, unsatisfactoriness, or the inability of conditioned things to provide lasting satisfaction.";
+
+  }else{
+
+    answer.innerHTML="❌ Not quite. Think about the Buddhist concept of <b>dukkha</b>.";
+
+  }
+
+}
+
+
 </script>
+
 </body>
 </html>
