@@ -693,7 +693,7 @@ button{
   <div class="card">
     <h3>Gemini</h3>
     <p class="muted" style="margin-top:8px">
-      Gemini integration will be connected in a future version.
+      Gemini is connected securely through the Seni backend.
     </p>
   </div>
 
@@ -788,25 +788,53 @@ function showPage(page,button){
 }
 
 
+async function askSeni(text){
+
+  addMessage("Thinking... 🤔","ai");
+
+  const messages=document.querySelectorAll(".message.ai");
+  const thinking=messages[messages.length-1];
+
+  try {
+
+    const response=await fetch("/.netlify/functions/ask-seni",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:text})
+    });
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || "Gemini request failed");
+    }
+
+    thinking.textContent=data.answer || "I couldn't generate a response.";
+
+  } catch(error) {
+
+    thinking.textContent="Sorry bro, I couldn't connect to Seni right now. Please try again. 😕";
+    console.error(error);
+
+  }
+}
+
+
 function startLearning(){
 
-  const input=document.getElementById("homeInput").value.trim();
+  const input=document.getElementById("homeInput");
 
-  if(!input){
+  const text=input.value.trim();
+
+  if(!text){
     alert("Tell me what you want to learn first 😊");
     return;
   }
 
+  input.value="";
   showPage("chat");
-
-  addMessage(input,"user");
-
-  setTimeout(()=>{
-    addMessage(
-      "Great choice! 🌱 I can help you learn step by step. In the full Gemini version, I will create a learning path based on your level, goal, time and learning style.",
-      "ai"
-    );
-  },500);
+  addMessage(text,"user");
+  askSeni(text);
 
 }
 
@@ -822,15 +850,7 @@ function sendMessage(){
   addMessage(text,"user");
 
   input.value="";
-
-  setTimeout(()=>{
-
-    addMessage(
-      "That's a great question! 😊 In the next version, Gemini will become your real AI teacher and give you a personalized answer.",
-      "ai"
-    );
-
-  },500);
+  askSeni(text);
 
 }
 
